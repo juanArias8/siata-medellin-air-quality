@@ -1,12 +1,7 @@
-import matplotlib.pyplot as plt
 import pandas as pd
-import numpy as np
 import os
 
 from utils import Urls
-from utils import AirFields
-from utils import TempFields
-from utils import WindFields
 
 all_data_air = []
 all_data_temp = []
@@ -55,29 +50,3 @@ save_file(temp_data_frame, Urls.valid_data, 'all_data_temp')
 save_file(wind_data_frame, Urls.valid_data, 'all_data_wind')
 
 
-def create_graph(frame, field_1, field_2, url):
-    ax = frame[[field_1, field_2]].plot(
-        kind='bar',
-        title=field_1 + ' vs ' + field_2,
-        figsize=(15, 10),
-        legend=True,
-        fontsize=12
-    )
-    ax.set_xlabel(field_1, fontsize=12)
-    ax.set_ylabel(field_2, fontsize=12)
-    figure = ax.get_figure()
-    figure.savefig(url + field_1 + ' vs ' + field_2 + '.png')
-
-
-create_graph(
-    air_data_frame, AirFields.date,
-    AirFields.pm25, Urls.graphs_air
-)
-create_graph(
-    temp_data_frame, TempFields.date,
-    TempFields.temp, Urls.graphs_temp
-)
-create_graph(
-    wind_data_frame, WindFields.date,
-    WindFields.speed,Urls.graphs_wind
-)
