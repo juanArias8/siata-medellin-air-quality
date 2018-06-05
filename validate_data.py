@@ -1,82 +1,71 @@
 import pandas as pd
 import os
 
-main_folder = os.path.realpath(__file__).replace('\\', '/').split('/')[0: -1]
+from utils import Urls
+from utils import AirFields
+from utils import TempFields
+from utils import WindFields
 
-unal_aire = os.path.join(
-    '/'.join(main_folder),
-    'valid_data',
-    'unal_aire/')
-unal_temperatura = os.path.join(
-    '/'.join(main_folder),
-    'valid_data',
-    'unal_temperatura/'
-)
-unal_viento = os.path.join(
-    '/'.join(main_folder),
-    'valid_data',
-    'unal_viento/'
-)
 
-for filename in os.listdir(unal_aire):
+for filename in os.listdir(Urls.unal_air):
     try:
-        file = unal_aire + filename
+        file = Urls.unal_air + filename
         data = pd.read_csv(file)
         print('Filename ' + filename + ' opened')
     except Exception as e:
         print(e)
-        pass
     else:
         valid_data = data.loc[
-            (data['Fecha_Hora'].str.endswith('12:00:00')) &
-            (data['calidad_pm25'] == 1.0),
-            ['Fecha_Hora', 'pm25']
+            (data[AirFields.date].str.endswith('12:00:00')),
+            [AirFields.date, AirFields.pm25]
         ]
+        valid_data.loc[valid_data[AirFields.pm25] < 0, AirFields.pm25] = 0
+        valid_data.loc[valid_data[AirFields.pm25] > 100, AirFields.pm25] = 0
         data_frame = pd.DataFrame(valid_data)
         data_frame.to_csv(
-            unal_aire + filename,
+            Urls.unal_air + filename,
             header=True,
             index=False
         )
 
-for filename in os.listdir(unal_temperatura):
+for filename in os.listdir(Urls.unal_temp):
     try:
-        file = unal_temperatura + filename
+        file = Urls.unal_temp + filename
         data = pd.read_csv(file)
         print('Filename ' + filename + ' opened')
     except Exception as e:
         print(e)
-        pass
     else:
         valid_data = data.loc[
-            (data['fecha_hora'].str.endswith('12:00:00')) &
-            (data['Calidad'] == 1),
-            ['fecha_hora', 'Temperatura']
+            (data[TempFields.date].str.endswith('12:00:00')),
+            [TempFields.date, TempFields.temp]
         ]
+        valid_data.loc[valid_data[TempFields.temp] < 0, TempFields.temp] = 0
+        valid_data.loc[valid_data[TempFields.temp] > 100, TempFields.temp] = 0
         data_frame = pd.DataFrame(valid_data)
         data_frame.to_csv(
-            unal_temperatura + filename,
+            Urls.unal_temp + filename,
             header=True,
             index=False
         )
 
-for filename in os.listdir(unal_viento):
+for filename in os.listdir(Urls.unal_wind):
     try:
-        file = unal_viento + filename
+        file = Urls.unal_wind + filename
         data = pd.read_csv(file)
         print('Filename ' + filename + ' opened')
     except Exception as e:
         print(e)
-        pass
     else:
         valid_data = data.loc[
-            (data['fecha_hora'].str.endswith('12:00:00')) &
-            (data['Calidad'] == 1),
-            ['fecha_hora', 'Velocidad_Prom', 'Direccion_Prom']
+            (data[WindFields.date].str.endswith('12:00:00')),
+            [WindFields.date, WindFields.speed]
         ]
+        valid_data.loc[valid_data[WindFields.speed] < 0, WindFields.speed] = 0
+        valid_data.loc[valid_data[WindFields.speed] > 100, WindFields.speed] = 0
         data_frame = pd.DataFrame(valid_data)
         data_frame.to_csv(
-            unal_viento + filename,
+            Urls.unal_wind + filename,
             header=True,
             index=False
         )
