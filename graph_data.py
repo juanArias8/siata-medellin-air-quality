@@ -49,52 +49,52 @@ unified_data_frame.to_csv(
     Urls.valid_data + 'final_data.csv',
     index=False
 )
-
-
-def create_graph(frame, field_1, field_2, url, name):
-    plot = frame[[field_1, field_2]].plot(
-        kind='bar',
-        title=name,
-        figsize=(15, 10),
-        legend=True,
-        fontsize=12
-    )
-    plot.set_xlabel(field_1, fontsize=12)
-    plot.set_ylabel(field_2, fontsize=12)
-    figure = plot.get_figure()
-    figure.savefig(url + name + '.png')
-
-
-create_graph(
-    air_data_frame, AirFields.date,
-    AirFields.pm25, Urls.graphs_air,
-    'date vs pm25'
-)
-create_graph(
-    temp_data_frame, TempFields.date,
-    TempFields.temp, Urls.graphs_temp,
-    'date vs temperature'
-)
-create_graph(
-    wind_data_frame, WindFields.date,
-    WindFields.speed, Urls.graphs_wind,
-    'date vs winds'
-)
-create_graph(
-    air_monthly, AirFields.date,
-    AirFields.pm25, Urls.graphs_air,
-    'All 15 days vs pm25'
-)
-create_graph(
-    temp_monthly, TempFields.date,
-    TempFields.temp, Urls.graphs_temp,
-    'All 15 days vs Temperature'
-)
-create_graph(
-    wind_monthly, WindFields.date,
-    WindFields.speed, Urls.graphs_wind,
-    'All 15 days vs wind speed'
-)
+#
+#
+# def create_graph(frame, field_1, field_2, url, name):
+#     plot = frame[[field_1, field_2]].plot(
+#         kind='bar',
+#         title=name,
+#         figsize=(15, 10),
+#         legend=True,
+#         fontsize=12
+#     )
+#     plot.set_xlabel(field_1, fontsize=12)
+#     plot.set_ylabel(field_2, fontsize=12)
+#     figure = plot.get_figure()
+#     figure.savefig(url + name + '.png')
+#
+#
+# create_graph(
+#     air_data_frame, AirFields.date,
+#     AirFields.pm25, Urls.graphs_air,
+#     'date vs pm25'
+# )
+# create_graph(
+#     temp_data_frame, TempFields.date,
+#     TempFields.temp, Urls.graphs_temp,
+#     'date vs temperature'
+# )
+# create_graph(
+#     wind_data_frame, WindFields.date,
+#     WindFields.speed, Urls.graphs_wind,
+#     'date vs winds'
+# )
+# create_graph(
+#     air_monthly, AirFields.date,
+#     AirFields.pm25, Urls.graphs_air,
+#     'All 15 days vs pm25'
+# )
+# create_graph(
+#     temp_monthly, TempFields.date,
+#     TempFields.temp, Urls.graphs_temp,
+#     'All 15 days vs Temperature'
+# )
+# create_graph(
+#     wind_monthly, WindFields.date,
+#     WindFields.speed, Urls.graphs_wind,
+#     'All 15 days vs wind speed'
+# )
 
 date_list = unified_data_frame.iloc[:, 0].tolist()
 pm25_list = unified_data_frame.iloc[:, 1].tolist()
@@ -116,5 +116,6 @@ plt.plot(date_list, pm25_list, 'r', label='Pm25')
 plt.plot(date_list, temp_list, 'g', label='Temperature')
 plt.plot(date_list, wind_list, 'b', label='Wind')
 plt.legend()
-plt.show()
 plt.savefig(Urls.graphs + 'final_data.png')
+plt.show()
+
