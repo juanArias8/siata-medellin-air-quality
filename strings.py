@@ -53,6 +53,11 @@ class Urls(object):
         'graphs_air/'
     )
 
+    graphs = os.path.join(
+        '/'.join(main_folder),
+        'images/',
+    )
+
     graphs_temp = os.path.join(
         '/'.join(main_folder),
         'images',

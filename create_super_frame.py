@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-from utils import Urls
+from strings import Urls
 
 all_data_air = []
 all_data_temp = []

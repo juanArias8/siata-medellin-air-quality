@@ -1,10 +1,10 @@
 import os
 from shutil import copyfile
 
-from utils import Urls
-from utils import AirFields
-from utils import TempFields
-from utils import WindFields
+from strings import Urls
+from strings import AirFields
+from strings import TempFields
+from strings import WindFields
 
 
 for directory in Urls.origin_directories:

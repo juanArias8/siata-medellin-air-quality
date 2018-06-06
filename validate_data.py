@@ -1,10 +1,10 @@
 import pandas as pd
 import os
 
-from utils import Urls
-from utils import AirFields
-from utils import TempFields
-from utils import WindFields
+from strings import Urls
+from strings import AirFields
+from strings import TempFields
+from strings import WindFields
 
 
 for filename in os.listdir(Urls.unal_air):
