@@ -101,6 +101,9 @@ pm25_list = unified_data_frame.iloc[:, 1].tolist()
 temp_list = unified_data_frame.iloc[:, 2].tolist()
 wind_list = unified_data_frame.iloc[:, 3].tolist()
 
+for i in range(len(date_list)):
+    date_list[i] = date_list[i][3:9]
+
 axe_y = [pm25_list, temp_list, wind_list]
 
 plt.figure()
