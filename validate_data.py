@@ -21,6 +21,15 @@ for filename in os.listdir(Urls.unal_air):
         ]
         valid_data.loc[valid_data[AirFields.pm25] < 0, AirFields.pm25] = 0
         valid_data.loc[valid_data[AirFields.pm25] > 100, AirFields.pm25] = 0
+        valid_d = valid_data.loc[
+            valid_data[AirFields.pm25] != 0, AirFields.pm25
+        ]
+        mean_air = valid_d.mean()
+        mean_air = int(mean_air)
+        print('mean_air ' + str(mean_air))
+        valid_data.loc[valid_data[
+           AirFields.pm25] == 0, AirFields.pm25
+        ] = int(mean_air)
         data_frame = pd.DataFrame(valid_data)
         data_frame.to_csv(
             Urls.unal_air + filename,
@@ -42,6 +51,15 @@ for filename in os.listdir(Urls.unal_temp):
         ]
         valid_data.loc[valid_data[TempFields.temp] < 0, TempFields.temp] = 0
         valid_data.loc[valid_data[TempFields.temp] > 100, TempFields.temp] = 0
+        valid_d = valid_data.loc[
+            valid_data[TempFields.temp] != 0, TempFields.temp
+        ]
+        mean_temp = valid_d.mean()
+        mean_temp = int(mean_temp)
+        print('Mean temp ' + str(mean_temp))
+        valid_data.loc[
+            valid_data[TempFields.temp] == 0, TempFields.temp
+        ] = int(mean_temp)
         data_frame = pd.DataFrame(valid_data)
         data_frame.to_csv(
             Urls.unal_temp + filename,
@@ -63,6 +81,15 @@ for filename in os.listdir(Urls.unal_wind):
         ]
         valid_data.loc[valid_data[WindFields.speed] < 0, WindFields.speed] = 0
         valid_data.loc[valid_data[WindFields.speed] > 100, WindFields.speed] = 0
+        valid_d = valid_data.loc[
+            valid_data[WindFields.speed] != 0, WindFields.speed
+        ]
+        mean_wind = valid_d.mean()
+        mean_wind = int(mean_wind)
+        print('Mean wind ' + str(mean_wind))
+        valid_data.loc[valid_data[
+            WindFields.speed] == 0, WindFields.speed
+        ] = mean_wind
         data_frame = pd.DataFrame(valid_data)
         data_frame.to_csv(
             Urls.unal_wind + filename,

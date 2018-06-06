@@ -101,27 +101,9 @@ pm25_list = unified_data_frame.iloc[:, 1].tolist()
 temp_list = unified_data_frame.iloc[:, 2].tolist()
 wind_list = unified_data_frame.iloc[:, 3].tolist()
 
-average_pm25 = np.average(pm25_list)
-average_temp = np.average(temp_list)
-average_wind = np.average(wind_list)
-
-for i in range(len(date_list)):
-    date_list[i] = date_list[i][3:9]
-
-for i in range(len(pm25_list)):
-    if pm25_list[i] == 0.0:
-        pm25_list[i] = average_pm25
-
-for i in range(len(temp_list)):
-    if temp_list[i] == 0.0:
-        temp_list[i] = average_temp
-
-for i in range(len(wind_list)):
-    if wind_list[i] == 0.0:
-        wind_list[i] = average_wind
-
 axe_y = [pm25_list, temp_list, wind_list]
 
+plt.figure()
 plt.xlabel("Date")
 plt.ylabel("pm25, temp, wind")
 plt.title("All 15 days values data")
